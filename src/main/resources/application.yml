@@ -1,0 +1,17 @@
+md5:
+  salt: hhhhhh
+
+
+server:
+  port: 10086
+
+spring:
+  datasource:
+    url: jdbc:mysql://106.12.124.28:3308/ygc?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ygc
+    password: ygcsql123!
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycu.edu.ygc.mapper.UsersMapper">
+
+    <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.entity.Users">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="uid" column="uid" jdbcType="VARCHAR"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="active" column="active" jdbcType="TINYINT"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,uid,username,
+        password,active,phone
+    </sql>
+
+    <select id="selectByUsername" parameterType="ycu.edu.ygc.pojo.vo.UserVO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ygc_users
+        where username = #{username}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ygc_users
+        where  id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ygc_users
+        where  id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ycu.edu.ygc.pojo.entity.Users" useGeneratedKeys="true">
+        insert into ygc_users
+        ( uid,username
+        ,password,phone
+        )
+        values (#{uid,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR}
+        ,#{password,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ycu.edu.ygc.pojo.entity.Users" useGeneratedKeys="true">
+        insert into ygc_users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="uid != null">uid,</if>
+                <if test="username != null">username,</if>
+                <if test="password != null">password,</if>
+                <if test="active != null">active,</if>
+                <if test="phone != null">phone,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="uid != null">#{uid,jdbcType=VARCHAR},</if>
+                <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+                <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+                <if test="active != null">#{active,jdbcType=TINYINT},</if>
+                <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="ycu.edu.ygc.pojo.entity.Users">
+        update ygc_users
+        <set>
+                <if test="uid != null">
+                    uid = #{uid,jdbcType=VARCHAR},
+                </if>
+                <if test="username != null">
+                    username = #{username,jdbcType=VARCHAR},
+                </if>
+                <if test="password != null">
+                    password = #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="active != null">
+                    active = #{active,jdbcType=TINYINT},
+                </if>
+                <if test="phone != null">
+                    phone = #{phone,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="ycu.edu.ygc.pojo.entity.Users">
+        update ygc_users
+        set
+            uid =  #{uid,jdbcType=VARCHAR},
+            username =  #{username,jdbcType=VARCHAR},
+            password =  #{password,jdbcType=VARCHAR},
+            active =  #{active,jdbcType=TINYINT},
+            phone =  #{phone,jdbcType=VARCHAR}
+        where   id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

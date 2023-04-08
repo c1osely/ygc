@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycu.edu.ygc.mapper.StoragesMapper">
+
+    <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.entity.Storages">
+            <id property="sId" column="s_id" jdbcType="INTEGER"/>
+            <result property="used" column="used" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        s_id,used
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ygc_storages
+        where  s_id = #{sId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ygc_storages
+        where  s_id = #{sId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true">
+        insert into ygc_storages
+        values (null,0)
+    </insert>
+    <select id="countUsed" resultType="int">
+        select
+        count(*)
+        from ygc_storages
+        where  used = 1
+    </select>
+    <select id="countAll" resultType="int">
+        select
+            count(*)
+        from ygc_storages
+    </select>
+    <delete id="deleteEmpty">
+        delete
+            from ygc_storages
+        where used = 0;
+    </delete>
+    <insert id="insertSelective" keyColumn="s_id" keyProperty="sId" parameterType="ycu.edu.ygc.pojo.entity.Storages" useGeneratedKeys="true">
+        insert into ygc_storages
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="sId != null">s_id,</if>
+                <if test="used != null">used,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="sId != null">#{sId,jdbcType=INTEGER},</if>
+                <if test="used != null">#{used,jdbcType=TINYINT},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="ycu.edu.ygc.pojo.entity.Storages">
+        update ygc_storages
+        <set>
+                <if test="used != null">
+                    used = #{used,jdbcType=TINYINT},
+                </if>
+        </set>
+        where   s_id = #{sId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="ycu.edu.ygc.pojo.entity.Storages">
+        update ygc_storages
+        set
+            used =  #{used,jdbcType=TINYINT}
+        where   s_id = #{sId,jdbcType=INTEGER}
+    </update>
+</mapper>

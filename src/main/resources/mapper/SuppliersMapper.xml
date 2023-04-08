@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ycu.edu.ygc.mapper.SuppliersMapper">
+
+    <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.entity.Suppliers">
+            <id property="supplierId" column="supplier_id" jdbcType="INTEGER"/>
+            <result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+            <result property="supplierAddress" column="supplier_address" jdbcType="VARCHAR"/>
+            <result property="supplierContactName" column="supplier_contact_name" jdbcType="VARCHAR"/>
+            <result property="supplierPhone" column="supplier_phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        supplier_id,supplier_name,supplier_address,
+        supplier_contact_name,supplier_phone
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ygc_suppliers
+        where  supplier_id = #{supplierId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ygc_suppliers
+        where  supplier_id = #{supplierId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="supplier_id" keyProperty="supplierId" parameterType="ycu.edu.ygc.pojo.entity.Suppliers" useGeneratedKeys="true">
+        insert into ygc_suppliers
+        ( supplier_id,supplier_name,supplier_address
+        ,supplier_contact_name,supplier_phone)
+        values (#{supplierId,jdbcType=INTEGER},#{supplierName,jdbcType=VARCHAR},#{supplierAddress,jdbcType=VARCHAR}
+        ,#{supplierContactName,jdbcType=VARCHAR},#{supplierPhone,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="supplier_id" keyProperty="supplierId" parameterType="ycu.edu.ygc.pojo.entity.Suppliers" useGeneratedKeys="true">
+        insert into ygc_suppliers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="supplierId != null">supplier_id,</if>
+                <if test="supplierName != null">supplier_name,</if>
+                <if test="supplierAddress != null">supplier_address,</if>
+                <if test="supplierContactName != null">supplier_contact_name,</if>
+                <if test="supplierPhone != null">supplier_phone,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="supplierId != null">#{supplierId,jdbcType=INTEGER},</if>
+                <if test="supplierName != null">#{supplierName,jdbcType=VARCHAR},</if>
+                <if test="supplierAddress != null">#{supplierAddress,jdbcType=VARCHAR},</if>
+                <if test="supplierContactName != null">#{supplierContactName,jdbcType=VARCHAR},</if>
+                <if test="supplierPhone != null">#{supplierPhone,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="ycu.edu.ygc.pojo.entity.Suppliers">
+        update ygc_suppliers
+        <set>
+                <if test="supplierName != null">
+                    supplier_name = #{supplierName,jdbcType=VARCHAR},
+                </if>
+                <if test="supplierAddress != null">
+                    supplier_address = #{supplierAddress,jdbcType=VARCHAR},
+                </if>
+                <if test="supplierContactName != null">
+                    supplier_contact_name = #{supplierContactName,jdbcType=VARCHAR},
+                </if>
+                <if test="supplierPhone != null">
+                    supplier_phone = #{supplierPhone,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   supplier_id = #{supplierId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="ycu.edu.ygc.pojo.entity.Suppliers">
+        update ygc_suppliers
+        set
+            supplier_name =  #{supplierName,jdbcType=VARCHAR},
+            supplier_address =  #{supplierAddress,jdbcType=VARCHAR},
+            supplier_contact_name =  #{supplierContactName,jdbcType=VARCHAR},
+            supplier_phone =  #{supplierPhone,jdbcType=VARCHAR}
+        where   supplier_id = #{supplierId,jdbcType=INTEGER}
+    </update>
+</mapper>
