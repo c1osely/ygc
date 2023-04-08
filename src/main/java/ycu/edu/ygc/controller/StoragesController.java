@@ -1,5 +1,6 @@
 package ycu.edu.ygc.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  * @date 2023/4/5 14:22
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/storage")
 public class StoragesController {
 

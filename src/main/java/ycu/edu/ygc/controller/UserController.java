@@ -1,5 +1,6 @@
 package ycu.edu.ygc.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
  * @date 2023/4/5 9:35
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
