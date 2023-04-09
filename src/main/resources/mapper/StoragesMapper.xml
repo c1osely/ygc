@@ -40,7 +40,7 @@
         from ygc_storages
     </select>
 
-    <select id="selectEmpty" resultType="int">
+    <select id="selectEmpty" resultType="Integer">
         select
             s_id
         from ygc_storages

@@ -20,7 +20,7 @@ public interface StoragesMapper {
 
     int countAll();
 
-    int selectEmpty();
+    Integer selectEmpty();
 
     void deleteEmpty();
 

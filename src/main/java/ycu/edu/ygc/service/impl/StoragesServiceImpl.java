@@ -3,6 +3,7 @@ package ycu.edu.ygc.service.impl;
 import org.springframework.stereotype.Service;
 import ycu.edu.ygc.exception.ServiceException;
 import ycu.edu.ygc.mapper.StoragesMapper;
+import ycu.edu.ygc.pojo.entity.Storages;
 import ycu.edu.ygc.service.StoragesService;
 
 import javax.annotation.Resource;
@@ -49,8 +50,27 @@ public class StoragesServiceImpl implements StoragesService {
     }
 
     @Override
-    public void layGoods() {
+    public void layGoods() throws ServiceException {
+        Integer sId = storagesMapper.selectEmpty();
+        if (sId == null) {
+            throw new ServiceException("仓储空间不足！");
+        }
+        Storages storages = new Storages();
+        storages.setSId(sId);
+        storages.setUsed(1);
+        int i = storagesMapper.updateByPrimaryKeySelective(storages);
+        if (i != 1)
+            throw new ServiceException("入库失败，服务器维护中...");
+    }
 
+    @Override
+    public void outGoods(Integer sId) throws ServiceException {
+        Storages storages = new Storages();
+        storages.setSId(sId);
+        storages.setUsed(0);
+        int i = storagesMapper.updateByPrimaryKeySelective(storages);
+        if (i != 1)
+            throw new ServiceException("出库失败，服务器维护中...");
     }
 
 }

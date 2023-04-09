@@ -18,5 +18,10 @@ public interface StoragesService {
     /**
      * 货物进仓默认调用方法
      */
-    void layGoods();
+    void layGoods() throws ServiceException;
+
+    /**
+     * 出库调用方法
+     */
+    void outGoods(Integer sId) throws ServiceException;
 }
