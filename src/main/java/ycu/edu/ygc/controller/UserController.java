@@ -41,13 +41,13 @@ public class UserController {
     }
 
     @PostMapping("/logon")
-    public JsonResult logon(UserVO userVO) {
+    public JsonResult<Void> logon(UserVO userVO) {
         try {
             userService.logon(userVO);
         } catch (ServiceException e) {
             return JsonResult.fail(ServiceCode.BAD_REQUEST,e.getMessage());
         }
-        return JsonResult.ok("注册成功！");
+        return JsonResult.ok();
     }
 
 }

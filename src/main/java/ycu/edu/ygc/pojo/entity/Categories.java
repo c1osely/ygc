@@ -4,7 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- *
+ * 
  * @TableName ygc_categories
  */
 @Data
@@ -20,7 +20,7 @@ public class Categories implements Serializable {
     private String categoryName;
 
     /**
-     *
+     * 
      */
     private Integer categoryEnabled;
 

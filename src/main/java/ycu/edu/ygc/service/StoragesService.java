@@ -15,4 +15,8 @@ public interface StoragesService {
      */
     void setStoragesSize(int size) throws ServiceException;
 
+    /**
+     * 货物进仓默认调用方法
+     */
+    void layGoods();
 }

@@ -4,12 +4,15 @@ import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import ycu.edu.ygc.exception.ServiceException;
+import ycu.edu.ygc.pojo.vo.CategoryVO;
 import ycu.edu.ygc.pojo.vo.UserVO;
+import ycu.edu.ygc.service.CategoryService;
 import ycu.edu.ygc.service.UserService;
 import ycu.edu.ygc.util.JwtUtil;
 import ycu.edu.ygc.util.UUIDUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
@@ -17,6 +20,8 @@ class YgcApplicationTests {
 
     @Resource
     private UserService userService;
+    @Resource
+    private CategoryService categoryService;
 
     @Test
     void login() {
@@ -56,4 +61,15 @@ class YgcApplicationTests {
         System.out.println(claims.get("username"));
     }
 
+    @Test
+    void testCategoryService() throws ServiceException {
+//        CategoryVO categoryVO = new CategoryVO();
+//        categoryVO.setCategoryId(3);
+//        categoryVO.setCategoryEnabled(1);
+//        categoryVO.setCategoryName("23131313");
+//        categoryService.addOrUpdateCategory(categoryVO);
+//        categoryService.deleteCategory(categoryVO);
+        List<CategoryVO> categoryVOS = categoryService.listCategory();
+        System.out.println(categoryVOS.toString());
+    }
 }

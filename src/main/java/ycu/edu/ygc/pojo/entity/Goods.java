@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- *
+ * 
  * @TableName ygc_goods
  */
 @Data

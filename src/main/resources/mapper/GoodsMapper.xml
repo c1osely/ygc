@@ -29,12 +29,12 @@
         select
         <include refid="Base_Column_List" />
         from ygc_goods
-        where  g_id = #{gId,jdbcType=INTEGER}
+        where  g_id = #{gId,jdbcType=INTEGER} 
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from ygc_goods
-        where  g_id = #{gId,jdbcType=INTEGER}
+        where  g_id = #{gId,jdbcType=INTEGER} 
     </delete>
     <insert id="insert" keyColumn="g_id" keyProperty="gId" parameterType="ycu.edu.ygc.pojo.entity.Goods" useGeneratedKeys="true">
         insert into ygc_goods
@@ -110,11 +110,11 @@
                     g_storage = #{gStorage,jdbcType=FLOAT},
                 </if>
         </set>
-        where   g_id = #{gId,jdbcType=INTEGER}
+        where   g_id = #{gId,jdbcType=INTEGER} 
     </update>
     <update id="updateByPrimaryKey" parameterType="ycu.edu.ygc.pojo.entity.Goods">
         update ygc_goods
-        set
+        set 
             g_item_num =  #{gItemNum,jdbcType=VARCHAR},
             category_name =  #{categoryName,jdbcType=VARCHAR},
             g_name =  #{gName,jdbcType=VARCHAR},
@@ -125,6 +125,6 @@
             g_weight =  #{gWeight,jdbcType=VARCHAR},
             g_quantity =  #{gQuantity,jdbcType=VARCHAR},
             g_storage =  #{gStorage,jdbcType=FLOAT}
-        where   g_id = #{gId,jdbcType=INTEGER}
+        where   g_id = #{gId,jdbcType=INTEGER} 
     </update>
 </mapper>

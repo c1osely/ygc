@@ -48,4 +48,9 @@ public class StoragesServiceImpl implements StoragesService {
         }
     }
 
+    @Override
+    public void layGoods() {
+
+    }
+
 }

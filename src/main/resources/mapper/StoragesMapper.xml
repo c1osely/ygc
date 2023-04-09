@@ -39,6 +39,14 @@
             count(*)
         from ygc_storages
     </select>
+
+    <select id="selectEmpty" resultType="int">
+        select
+            s_id
+        from ygc_storages
+        where used = 0 limit 0
+    </select>
+
     <delete id="deleteEmpty">
         delete
             from ygc_storages

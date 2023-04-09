@@ -6,11 +6,67 @@
 
     <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.entity.Categories">
             <id property="categoryId" column="category_id" jdbcType="INTEGER"/>
-            <id property="categoryName" column="category_name" jdbcType="VARCHAR"/>
+            <result property="categoryName" column="category_name" jdbcType="VARCHAR"/>
             <result property="categoryEnabled" column="category_enabled" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         category_id,category_name,category_enabled
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ygc_categories
+        where  category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+    <select id="list" resultType="ycu.edu.ygc.pojo.vo.CategoryVO">
+        select * from ygc_categories where category_enabled = 1
+    </select>
+    <select id="countAlready" resultType="java.lang.Integer">
+        select count(*) from ygc_categories where category_name = #{categoryName}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ygc_categories
+        where  category_id = #{categoryId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="category_id" keyProperty="categoryId" parameterType="ycu.edu.ygc.pojo.entity.Categories" useGeneratedKeys="true">
+        insert into ygc_categories
+        ( category_id,category_name,category_enabled
+        )
+        values (#{categoryId,jdbcType=INTEGER},#{categoryName,jdbcType=VARCHAR},#{categoryEnabled,jdbcType=TINYINT}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="category_id" keyProperty="categoryId" parameterType="ycu.edu.ygc.pojo.vo.CategoryVO" useGeneratedKeys="true">
+        insert into ygc_categories
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="categoryId != null">category_id,</if>
+                <if test="categoryName != null">category_name,</if>
+                <if test="categoryEnabled != null">category_enabled,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="categoryId != null">#{categoryId,jdbcType=INTEGER},</if>
+                <if test="categoryName != null">#{categoryName,jdbcType=VARCHAR},</if>
+                <if test="categoryEnabled != null">#{categoryEnabled,jdbcType=TINYINT},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="ycu.edu.ygc.pojo.vo.CategoryVO">
+        update ygc_categories
+        <set>
+                <if test="categoryName != null">
+                    category_name = #{categoryName,jdbcType=VARCHAR},
+                </if>
+                <if test="categoryEnabled != null">
+                    category_enabled = #{categoryEnabled,jdbcType=TINYINT},
+                </if>
+        </set>
+        where   category_id = #{categoryId,jdbcType=INTEGER}
+    </update>
+    <update id="updateStatusById" parameterType="ycu.edu.ygc.pojo.vo.CategoryVO">
+        update ygc_categories
+        set
+            category_enabled = 0
+        where   category_id = #{categoryId,jdbcType=INTEGER}
+    </update>
 </mapper>

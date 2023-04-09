@@ -20,6 +20,8 @@ public interface StoragesMapper {
 
     int countAll();
 
+    int selectEmpty();
+
     void deleteEmpty();
 
     int insertSelective(Storages record);
