@@ -48,4 +48,9 @@ public class CategoryController {
         return JsonResult.ok(categoryService.listCategory());
     }
 
+    @PostMapping("/detail")
+    public JsonResult<CategoryVO> getOne(CategoryVO categoryVO){
+        return JsonResult.ok(categoryService.getOne(categoryVO));
+    }
+
 }

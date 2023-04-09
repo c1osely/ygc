@@ -44,6 +44,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public CategoryVO getOne(CategoryVO categoryVO) {
+        return categoriesMapper.selectOne(categoryVO);
+    }
+
+    @Override
     public List<CategoryVO> listCategory() {
         return categoriesMapper.list();
     }

@@ -1,7 +1,6 @@
 package ycu.edu.ygc.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import ycu.edu.ygc.pojo.entity.Categories;
 import ycu.edu.ygc.pojo.vo.CategoryVO;
 
@@ -22,7 +21,7 @@ public interface CategoriesMapper {
 
     int insertSelective(CategoryVO categoryVO);
 
-    Categories selectByPrimaryKey(Long id);
+    CategoryVO selectOne(CategoryVO categoryVO);
 
     int updateByPrimaryKeySelective(CategoryVO record);
 

@@ -14,7 +14,7 @@
         category_id,category_name,category_enabled
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectOne" parameterType="ycu.edu.ygc.pojo.vo.CategoryVO" resultType="ycu.edu.ygc.pojo.vo.CategoryVO">
         select
         <include refid="Base_Column_List" />
         from ygc_categories

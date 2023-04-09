@@ -26,6 +26,13 @@ public interface CategoryService {
     void deleteCategory(CategoryVO categoryVO) throws ServiceException;
 
     /**
+     * 查看指定分类信息
+     * @param categoryVO
+     * @return
+     */
+    CategoryVO getOne(CategoryVO categoryVO);
+
+    /**
      * 查看所有分类
      * @return
      */
