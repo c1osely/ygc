@@ -5,7 +5,7 @@ import ycu.edu.ygc.pojo.entity.Goods;
 /**
 * @author wyj
 * @description 针对表【ygc_goods】的数据库操作Mapper
-* @createDate 2023-04-09 10:52:17
+* @createDate 2023-04-09 13:22:29
 * @Entity ycu.edu.ygc.pojo.entity.Goods
 */
 public interface GoodsMapper {

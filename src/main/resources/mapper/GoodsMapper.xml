@@ -7,7 +7,7 @@
     <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.entity.Goods">
             <id property="gId" column="g_id" jdbcType="INTEGER"/>
             <result property="gItemNum" column="g_item_num" jdbcType="VARCHAR"/>
-            <result property="categoryName" column="category_name" jdbcType="VARCHAR"/>
+            <result property="categoryId" column="category_id" jdbcType="VARCHAR"/>
             <result property="gName" column="g_name" jdbcType="VARCHAR"/>
             <result property="gShortName" column="g_short_name" jdbcType="VARCHAR"/>
             <result property="supplierId" column="supplier_id" jdbcType="INTEGER"/>
@@ -19,7 +19,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        g_id,g_item_num,category_name,
+        g_id,g_item_num,category_id,
         g_name,g_short_name,supplier_id,
         g_madeIn,g_life,g_weight,
         g_quantity,g_storage
@@ -38,11 +38,11 @@
     </delete>
     <insert id="insert" keyColumn="g_id" keyProperty="gId" parameterType="ycu.edu.ygc.pojo.entity.Goods" useGeneratedKeys="true">
         insert into ygc_goods
-        ( g_id,g_item_num,category_name
+        ( g_id,g_item_num,category_id
         ,g_name,g_short_name,supplier_id
         ,g_madeIn,g_life,g_weight
         ,g_quantity,g_storage)
-        values (#{gId,jdbcType=INTEGER},#{gItemNum,jdbcType=VARCHAR},#{categoryName,jdbcType=VARCHAR}
+        values (#{gId,jdbcType=INTEGER},#{gItemNum,jdbcType=VARCHAR},#{categoryId,jdbcType=VARCHAR}
         ,#{gName,jdbcType=VARCHAR},#{gShortName,jdbcType=VARCHAR},#{supplierId,jdbcType=INTEGER}
         ,#{gMadein,jdbcType=VARCHAR},#{gLife,jdbcType=DATE},#{gWeight,jdbcType=VARCHAR}
         ,#{gQuantity,jdbcType=VARCHAR},#{gStorage,jdbcType=FLOAT})
@@ -52,7 +52,7 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="gId != null">g_id,</if>
                 <if test="gItemNum != null">g_item_num,</if>
-                <if test="categoryName != null">category_name,</if>
+                <if test="categoryId != null">category_id,</if>
                 <if test="gName != null">g_name,</if>
                 <if test="gShortName != null">g_short_name,</if>
                 <if test="supplierId != null">supplier_id,</if>
@@ -65,7 +65,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="gId != null">#{gId,jdbcType=INTEGER},</if>
                 <if test="gItemNum != null">#{gItemNum,jdbcType=VARCHAR},</if>
-                <if test="categoryName != null">#{categoryName,jdbcType=VARCHAR},</if>
+                <if test="categoryId != null">#{categoryId,jdbcType=VARCHAR},</if>
                 <if test="gName != null">#{gName,jdbcType=VARCHAR},</if>
                 <if test="gShortName != null">#{gShortName,jdbcType=VARCHAR},</if>
                 <if test="supplierId != null">#{supplierId,jdbcType=INTEGER},</if>
@@ -82,8 +82,8 @@
                 <if test="gItemNum != null">
                     g_item_num = #{gItemNum,jdbcType=VARCHAR},
                 </if>
-                <if test="categoryName != null">
-                    category_name = #{categoryName,jdbcType=VARCHAR},
+                <if test="categoryId != null">
+                    category_id = #{categoryId,jdbcType=VARCHAR},
                 </if>
                 <if test="gName != null">
                     g_name = #{gName,jdbcType=VARCHAR},
@@ -116,7 +116,7 @@
         update ygc_goods
         set 
             g_item_num =  #{gItemNum,jdbcType=VARCHAR},
-            category_name =  #{categoryName,jdbcType=VARCHAR},
+            category_id =  #{categoryId,jdbcType=VARCHAR},
             g_name =  #{gName,jdbcType=VARCHAR},
             g_short_name =  #{gShortName,jdbcType=VARCHAR},
             supplier_id =  #{supplierId,jdbcType=INTEGER},

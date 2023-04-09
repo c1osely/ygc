@@ -17,11 +17,18 @@
         supplier_contact_name,supplier_phone
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectById" parameterType="ycu.edu.ygc.pojo.vo.SuppliersVO" resultType="ycu.edu.ygc.pojo.vo.SuppliersVO">
         select
         <include refid="Base_Column_List" />
         from ygc_suppliers
         where  supplier_id = #{supplierId,jdbcType=INTEGER}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from ygc_suppliers where supplier_name = #{supplierName}
+    </select>
+    <select id="list" resultType="ycu.edu.ygc.pojo.vo.SuppliersVO">
+        select <include refid="Base_Column_List" />
+            from ygc_suppliers
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -35,7 +42,7 @@
         values (#{supplierId,jdbcType=INTEGER},#{supplierName,jdbcType=VARCHAR},#{supplierAddress,jdbcType=VARCHAR}
         ,#{supplierContactName,jdbcType=VARCHAR},#{supplierPhone,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" keyColumn="supplier_id" keyProperty="supplierId" parameterType="ycu.edu.ygc.pojo.entity.Suppliers" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="supplier_id" keyProperty="supplierId" parameterType="ycu.edu.ygc.pojo.vo.SuppliersVO" useGeneratedKeys="true">
         insert into ygc_suppliers
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="supplierId != null">supplier_id,</if>
@@ -52,7 +59,7 @@
                 <if test="supplierPhone != null">#{supplierPhone,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="ycu.edu.ygc.pojo.entity.Suppliers">
+    <update id="updateByPrimaryKeySelective" parameterType="ycu.edu.ygc.pojo.vo.SuppliersVO">
         update ygc_suppliers
         <set>
                 <if test="supplierName != null">

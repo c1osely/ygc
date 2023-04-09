@@ -21,9 +21,9 @@ public class Goods implements Serializable {
     private String gItemNum;
 
     /**
-     * 货物类别
+     * 货物类别id
      */
-    private String categoryName;
+    private String categoryId;
 
     /**
      * 货物名称
