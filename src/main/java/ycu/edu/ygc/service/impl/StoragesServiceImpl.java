@@ -50,7 +50,7 @@ public class StoragesServiceImpl implements StoragesService {
     }
 
     @Override
-    public void layGoods() throws ServiceException {
+    public Integer layGoods() throws ServiceException {
         Integer sId = storagesMapper.selectEmpty();
         if (sId == null) {
             throw new ServiceException("仓储空间不足！");
@@ -61,6 +61,7 @@ public class StoragesServiceImpl implements StoragesService {
         int i = storagesMapper.updateByPrimaryKeySelective(storages);
         if (i != 1)
             throw new ServiceException("入库失败，服务器维护中...");
+        return sId;
     }
 
     @Override

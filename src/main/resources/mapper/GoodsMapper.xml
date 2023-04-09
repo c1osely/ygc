@@ -5,9 +5,9 @@
 <mapper namespace="ycu.edu.ygc.mapper.GoodsMapper">
 
     <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.entity.Goods">
-            <id property="gId" column="g_id" jdbcType="INTEGER"/>
+            <id property="gId" column="g_id" jdbcType="VARCHAR"/>
             <result property="gItemNum" column="g_item_num" jdbcType="VARCHAR"/>
-            <result property="categoryId" column="category_id" jdbcType="VARCHAR"/>
+            <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
             <result property="gName" column="g_name" jdbcType="VARCHAR"/>
             <result property="gShortName" column="g_short_name" jdbcType="VARCHAR"/>
             <result property="supplierId" column="supplier_id" jdbcType="INTEGER"/>
@@ -16,38 +16,43 @@
             <result property="gWeight" column="g_weight" jdbcType="VARCHAR"/>
             <result property="gQuantity" column="g_quantity" jdbcType="VARCHAR"/>
             <result property="gStorage" column="g_storage" jdbcType="FLOAT"/>
+            <result property="gUnit" column="g_unit" jdbcType="VARCHAR"/>
+            <result property="sId" column="s_id" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         g_id,g_item_num,category_id,
         g_name,g_short_name,supplier_id,
         g_madeIn,g_life,g_weight,
-        g_quantity,g_storage
+        g_quantity,g_storage,g_unit,
+        s_id
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from ygc_goods
-        where  g_id = #{gId,jdbcType=INTEGER} 
+        where  g_id = #{gId,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from ygc_goods
-        where  g_id = #{gId,jdbcType=INTEGER} 
+        where  g_id = #{gId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" keyColumn="g_id" keyProperty="gId" parameterType="ycu.edu.ygc.pojo.entity.Goods" useGeneratedKeys="true">
         insert into ygc_goods
         ( g_id,g_item_num,category_id
         ,g_name,g_short_name,supplier_id
         ,g_madeIn,g_life,g_weight
-        ,g_quantity,g_storage)
-        values (#{gId,jdbcType=INTEGER},#{gItemNum,jdbcType=VARCHAR},#{categoryId,jdbcType=VARCHAR}
+        ,g_quantity,g_storage,g_unit
+        ,s_id)
+        values (#{gId,jdbcType=VARCHAR},#{gItemNum,jdbcType=VARCHAR},#{categoryId,jdbcType=INTEGER}
         ,#{gName,jdbcType=VARCHAR},#{gShortName,jdbcType=VARCHAR},#{supplierId,jdbcType=INTEGER}
         ,#{gMadein,jdbcType=VARCHAR},#{gLife,jdbcType=DATE},#{gWeight,jdbcType=VARCHAR}
-        ,#{gQuantity,jdbcType=VARCHAR},#{gStorage,jdbcType=FLOAT})
+        ,#{gQuantity,jdbcType=VARCHAR},#{gStorage,jdbcType=FLOAT},#{gUnit,jdbcType=VARCHAR}
+        ,#{sId,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="g_id" keyProperty="gId" parameterType="ycu.edu.ygc.pojo.entity.Goods" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="g_id" keyProperty="gId" parameterType="ycu.edu.ygc.pojo.vo.GoodVO" useGeneratedKeys="true">
         insert into ygc_goods
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="gId != null">g_id,</if>
@@ -61,11 +66,13 @@
                 <if test="gWeight != null">g_weight,</if>
                 <if test="gQuantity != null">g_quantity,</if>
                 <if test="gStorage != null">g_storage,</if>
+                <if test="gUnit != null">g_unit,</if>
+                <if test="sId != null">s_id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="gId != null">#{gId,jdbcType=INTEGER},</if>
+                <if test="gId != null">#{gId,jdbcType=VARCHAR},</if>
                 <if test="gItemNum != null">#{gItemNum,jdbcType=VARCHAR},</if>
-                <if test="categoryId != null">#{categoryId,jdbcType=VARCHAR},</if>
+                <if test="categoryId != null">#{categoryId,jdbcType=INTEGER},</if>
                 <if test="gName != null">#{gName,jdbcType=VARCHAR},</if>
                 <if test="gShortName != null">#{gShortName,jdbcType=VARCHAR},</if>
                 <if test="supplierId != null">#{supplierId,jdbcType=INTEGER},</if>
@@ -74,6 +81,8 @@
                 <if test="gWeight != null">#{gWeight,jdbcType=VARCHAR},</if>
                 <if test="gQuantity != null">#{gQuantity,jdbcType=VARCHAR},</if>
                 <if test="gStorage != null">#{gStorage,jdbcType=FLOAT},</if>
+                <if test="gUnit != null">#{gUnit,jdbcType=VARCHAR},</if>
+                <if test="sId != null">#{sId,jdbcType=INTEGER},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="ycu.edu.ygc.pojo.entity.Goods">
@@ -83,7 +92,7 @@
                     g_item_num = #{gItemNum,jdbcType=VARCHAR},
                 </if>
                 <if test="categoryId != null">
-                    category_id = #{categoryId,jdbcType=VARCHAR},
+                    category_id = #{categoryId,jdbcType=INTEGER},
                 </if>
                 <if test="gName != null">
                     g_name = #{gName,jdbcType=VARCHAR},
@@ -109,14 +118,20 @@
                 <if test="gStorage != null">
                     g_storage = #{gStorage,jdbcType=FLOAT},
                 </if>
+                <if test="gUnit != null">
+                    g_unit = #{gUnit,jdbcType=VARCHAR},
+                </if>
+                <if test="sId != null">
+                    s_id = #{sId,jdbcType=INTEGER},
+                </if>
         </set>
-        where   g_id = #{gId,jdbcType=INTEGER} 
+        where   g_id = #{gId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="ycu.edu.ygc.pojo.entity.Goods">
         update ygc_goods
-        set 
+        set
             g_item_num =  #{gItemNum,jdbcType=VARCHAR},
-            category_id =  #{categoryId,jdbcType=VARCHAR},
+            category_id =  #{categoryId,jdbcType=INTEGER},
             g_name =  #{gName,jdbcType=VARCHAR},
             g_short_name =  #{gShortName,jdbcType=VARCHAR},
             supplier_id =  #{supplierId,jdbcType=INTEGER},
@@ -124,7 +139,9 @@
             g_life =  #{gLife,jdbcType=DATE},
             g_weight =  #{gWeight,jdbcType=VARCHAR},
             g_quantity =  #{gQuantity,jdbcType=VARCHAR},
-            g_storage =  #{gStorage,jdbcType=FLOAT}
-        where   g_id = #{gId,jdbcType=INTEGER} 
+            g_storage =  #{gStorage,jdbcType=FLOAT},
+            g_unit =  #{gUnit,jdbcType=VARCHAR},
+            s_id =  #{sId,jdbcType=INTEGER}
+        where   g_id = #{gId,jdbcType=VARCHAR}
     </update>
 </mapper>

@@ -13,7 +13,7 @@ public class Goods implements Serializable {
     /**
      * 货物id
      */
-    private Integer gId;
+    private String gId;
 
     /**
      * 货物批次
@@ -23,7 +23,7 @@ public class Goods implements Serializable {
     /**
      * 货物类别id
      */
-    private String categoryId;
+    private Integer categoryId;
 
     /**
      * 货物名称
@@ -64,6 +64,16 @@ public class Goods implements Serializable {
      * 货物存储
      */
     private Double gStorage;
+
+    /**
+     * 计量单位
+     */
+    private String gUnit;
+
+    /**
+     * 仓储id
+     */
+    private Integer sId;
 
     private static final long serialVersionUID = 1L;
 }
