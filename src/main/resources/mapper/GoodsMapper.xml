@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ycu.edu.ygc.mapper.GoodsMapper">
 
-    <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.entity.Goods">
+    <resultMap id="BaseResultMap" type="ycu.edu.ygc.pojo.vo.GoodVO">
             <id property="gId" column="g_id" jdbcType="VARCHAR"/>
             <result property="gItemNum" column="g_item_num" jdbcType="VARCHAR"/>
             <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
@@ -18,6 +18,7 @@
             <result property="gStorage" column="g_storage" jdbcType="FLOAT"/>
             <result property="gUnit" column="g_unit" jdbcType="VARCHAR"/>
             <result property="sId" column="s_id" jdbcType="INTEGER"/>
+            <result property="category_name" column="categoryName" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -28,11 +29,22 @@
         s_id
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from ygc_goods
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select yg.g_id,yg.g_item_num,yg.category_id,
+               yg.g_name,yg.g_short_name,yg.supplier_id,
+               yg.g_madeIn,yg.g_life,yg.g_weight,
+               yg.g_quantity,yg.g_storage,yg.g_unit,
+               yg.s_id,yc.category_name
+        from ygc_goods yg left join ygc_categories yc on yg.category_id = yc.category_id
         where  g_id = #{gId,jdbcType=VARCHAR}
+    </select>
+    <select id="list" resultMap="BaseResultMap">
+        select yg.g_id,yg.g_item_num,yg.category_id,
+               yg.g_name,yg.g_short_name,yg.supplier_id,
+               yg.g_madeIn,yg.g_life,yg.g_weight,
+               yg.g_quantity,yg.g_storage,yg.g_unit,
+               yg.s_id,yc.category_name
+        from ygc_goods yg left join ygc_categories yc on yg.category_id = yc.category_id
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -143,5 +155,9 @@
             g_unit =  #{gUnit,jdbcType=VARCHAR},
             s_id =  #{sId,jdbcType=INTEGER}
         where   g_id = #{gId,jdbcType=VARCHAR}
+    </update>
+    <update id="changeQuantity" parameterType="ycu.edu.ygc.pojo.vo.GoodVO">
+        update ygc_goods
+            set g_quantity = g_quantity - #{gQuantity} where g_id = #{gId}
     </update>
 </mapper>

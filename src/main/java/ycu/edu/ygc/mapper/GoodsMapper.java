@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import ycu.edu.ygc.pojo.entity.Goods;
 import ycu.edu.ygc.pojo.vo.GoodVO;
 
+import java.util.List;
+
 /**
  *
 * @author wyj
@@ -20,10 +22,13 @@ public interface GoodsMapper {
 
     int insertSelective(GoodVO record);
 
-    Goods selectByPrimaryKey(String id);
+    GoodVO selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);
 
+    int changeQuantity(GoodVO goodVO);
+
+    List<GoodVO> list();
 }

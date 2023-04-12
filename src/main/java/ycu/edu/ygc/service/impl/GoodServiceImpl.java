@@ -9,6 +9,7 @@ import ycu.edu.ygc.service.StoragesService;
 import ycu.edu.ygc.util.UUIDUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author WYJ
@@ -34,5 +35,31 @@ public class GoodServiceImpl implements GoodService {
         int i = goodsMapper.insertSelective(goodVO);
         if (i != 1)
             throw new ServiceException("商品入库失败！");
+    }
+
+    @Override
+    public void subGoods(GoodVO goodVO) throws ServiceException {
+        GoodVO result = goodsMapper.selectByPrimaryKey(goodVO.getGId());
+        if (Integer.parseInt(result.getGQuantity()) < Integer.parseInt(goodVO.getGQuantity())) {
+            throw new ServiceException("出库失败，库存不足！");
+        }
+        int i = goodsMapper.changeQuantity(goodVO);
+        if (i != 1) {
+            throw new ServiceException("出库失败，服务器正在维护...");
+        }
+        if (Integer.valueOf(result.getGQuantity()) == Integer.valueOf(goodVO.getGQuantity())) {
+            Integer sId = result.getSId();
+            storagesService.outGoods(sId);
+        }
+    }
+
+    @Override
+    public List<GoodVO> list() {
+        return goodsMapper.list();
+    }
+
+    @Override
+    public GoodVO getDetail(GoodVO goodVO) {
+        return goodsMapper.selectByPrimaryKey(goodVO.getGId());
     }
 }
