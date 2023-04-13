@@ -1,17 +1,16 @@
 package ycu.edu.ygc.pojo.entity;
 
+import java.io.Serializable;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
- *
+ * 
  * @TableName messages
  */
 @Data
 public class Messages implements Serializable {
     /**
-     *
+     * 
      */
     private Integer id;
 

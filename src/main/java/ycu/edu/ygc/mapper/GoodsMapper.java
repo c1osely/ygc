@@ -31,4 +31,6 @@ public interface GoodsMapper {
     int changeQuantity(GoodVO goodVO);
 
     List<GoodVO> list();
+
+    List<GoodVO> checkDate(GoodVO goodVO);
 }

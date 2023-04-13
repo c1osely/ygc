@@ -46,6 +46,11 @@
                yg.s_id,yc.category_name
         from ygc_goods yg left join ygc_categories yc on yg.category_id = yc.category_id
     </select>
+    <select id="checkDate" resultType="ycu.edu.ygc.pojo.vo.GoodVO">
+        select *
+            from ygc_goods
+        where g_life &lt;= #{gLife}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from ygc_goods

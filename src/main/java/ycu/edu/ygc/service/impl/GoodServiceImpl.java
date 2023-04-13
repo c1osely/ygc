@@ -1,6 +1,7 @@
 package ycu.edu.ygc.service.impl;
 
 import org.springframework.stereotype.Service;
+import ycu.edu.ygc.constant.GoodOverDueConstant;
 import ycu.edu.ygc.exception.ServiceException;
 import ycu.edu.ygc.mapper.GoodsMapper;
 import ycu.edu.ygc.pojo.vo.GoodVO;
@@ -9,6 +10,8 @@ import ycu.edu.ygc.service.StoragesService;
 import ycu.edu.ygc.util.UUIDUtils;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,4 +65,18 @@ public class GoodServiceImpl implements GoodService {
     public GoodVO getDetail(GoodVO goodVO) {
         return goodsMapper.selectByPrimaryKey(goodVO.getGId());
     }
+
+    @Override
+    public List<GoodVO> checkDate() {
+        GoodVO goodVO = new GoodVO();
+        Date date = new Date();
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(date);
+        rightNow.add(Calendar.DAY_OF_YEAR,+GoodOverDueConstant.OVERDUE_DATE);//日期加指定天数
+        Date time = rightNow.getTime();
+        goodVO.setGLife(time);
+        List<GoodVO> goodVOS = goodsMapper.checkDate(goodVO);
+        return goodVOS;
+    }
+
 }

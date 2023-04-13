@@ -59,6 +59,11 @@
             <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
+        <!--  springBoot整合Quartz依赖  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
         <!-- Spring Boot测试的依赖项 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

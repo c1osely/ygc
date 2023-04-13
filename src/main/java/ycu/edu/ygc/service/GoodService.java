@@ -37,4 +37,10 @@ public interface GoodService {
      * @return
      */
     GoodVO getDetail(GoodVO goodVO);
+
+    /**
+     * 检测商品过期时间(距离指定日期)
+     * @return
+     */
+    List<GoodVO> checkDate();
 }
