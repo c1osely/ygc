@@ -24,4 +24,6 @@ public interface StoragesService {
      * 出库调用方法
      */
     void outGoods(Integer sId) throws ServiceException;
+
+    int count();
 }

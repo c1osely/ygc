@@ -1,9 +1,6 @@
 package ycu.edu.ygc.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ycu.edu.ygc.constant.ServiceCode;
 import ycu.edu.ygc.exception.ServiceException;
 import ycu.edu.ygc.service.StoragesService;
@@ -34,4 +31,8 @@ public class StoragesController {
         return JsonResult.ok();
     }
 
+    @GetMapping("/count")
+    public JsonResult<Integer> getCount(){
+        return JsonResult.ok(storagesService.count());
+    }
 }

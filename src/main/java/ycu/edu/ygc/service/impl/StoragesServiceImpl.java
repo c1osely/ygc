@@ -74,4 +74,9 @@ public class StoragesServiceImpl implements StoragesService {
             throw new ServiceException("出库失败，服务器维护中...");
     }
 
+    @Override
+    public int count() {
+        return storagesMapper.countAll();
+    }
+
 }
