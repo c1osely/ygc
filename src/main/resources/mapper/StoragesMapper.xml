@@ -46,6 +46,9 @@
         from ygc_storages
         where used = 0 limit 1
     </select>
+    <select id="list" resultType="ycu.edu.ygc.pojo.entity.Storages">
+        select * from ygc_storages
+    </select>
 
     <delete id="deleteEmpty">
         delete

@@ -7,6 +7,7 @@ import ycu.edu.ygc.pojo.entity.Storages;
 import ycu.edu.ygc.service.StoragesService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author WYJ
@@ -77,6 +78,11 @@ public class StoragesServiceImpl implements StoragesService {
     @Override
     public int count() {
         return storagesMapper.countAll();
+    }
+
+    @Override
+    public List<Storages> list() {
+        return storagesMapper.list();
     }
 
 }

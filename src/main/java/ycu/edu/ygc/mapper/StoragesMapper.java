@@ -3,6 +3,8 @@ package ycu.edu.ygc.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import ycu.edu.ygc.pojo.entity.Storages;
 
+import java.util.List;
+
 /**
 * @author wyj
 * @description 针对表【ygc_storages】的数据库操作Mapper
@@ -31,5 +33,7 @@ public interface StoragesMapper {
     int updateByPrimaryKeySelective(Storages record);
 
     int updateByPrimaryKey(Storages record);
+
+    List<Storages> list();
 
 }

@@ -1,6 +1,9 @@
 package ycu.edu.ygc.service;
 
 import ycu.edu.ygc.exception.ServiceException;
+import ycu.edu.ygc.pojo.entity.Storages;
+
+import java.util.List;
 
 /**
  * @author WYJ
@@ -25,5 +28,15 @@ public interface StoragesService {
      */
     void outGoods(Integer sId) throws ServiceException;
 
+    /**
+     * 统计仓储总容量
+     * @return
+     */
     int count();
+
+    /**
+     * 获取所有仓储
+     * @return
+     */
+    List<Storages> list();
 }
