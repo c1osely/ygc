@@ -43,4 +43,6 @@ public interface GoodService {
      * @return
      */
     List<GoodVO> checkDate();
+
+    String changeDate(Integer date);
 }

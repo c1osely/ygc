@@ -79,4 +79,9 @@ public class GoodServiceImpl implements GoodService {
         return goodVOS;
     }
 
+    @Override
+    public String changeDate(Integer date) {
+        return "保质期提醒期限已设置为" + date + "天";
+    }
+
 }

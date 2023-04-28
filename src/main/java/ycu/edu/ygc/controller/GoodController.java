@@ -55,4 +55,10 @@ public class GoodController {
         return JsonResult.ok(detail);
     }
 
+    @GetMapping("/changeDate")
+    public JsonResult<String> changeDate(Integer date){
+        String message = goodService.changeDate(date);
+        return JsonResult.ok(message);
+    }
+
 }
